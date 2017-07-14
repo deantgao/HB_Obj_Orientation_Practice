@@ -1,5 +1,7 @@
 """Classes for melon orders."""
 
+import random
+
 
 class AbstractMelonOrder(object):
     """docstring for AbstractMelonOrder"""
@@ -11,6 +13,7 @@ class AbstractMelonOrder(object):
         self.shipped = False
         self.order_type = order_type
         self.tax = tax
+        #self.passed = False
 
     def get_total(self):
         """Calculate price, including tax."""
@@ -28,6 +31,34 @@ class AbstractMelonOrder(object):
         """Record the fact than an order has been shipped."""
 
         self.shipped = True
+
+
+class GovernmentMelonOrder(AbstractMelonOrder):
+    """ """
+
+    # passed_inspection = False
+
+    def __init__(self, species, qty):
+        super(GovernmentMelonOrder, self).__init__(species, qty, "domestic", 0)
+        self.passed_inspection = False
+
+    # def inspect(self):
+    #     """Inspect the order"""
+
+    #     return random.choice([True, False])
+
+
+    def mark_inspection(self, passed):
+        """Record the fact that an order has passed inspection."""
+        # if passed:
+        #     self.passed_inspection = True
+        self.passed_inspection = passed
+
+
+
+# order = GovernmentMelonOrder("watermelon", 8)
+# did_pass = order.inspect()
+# order.mark_inspection(did_pass)
 
 
 class DomesticMelonOrder(AbstractMelonOrder):
